@@ -1,5 +1,7 @@
 package com.cucumber.testng.driver;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -30,5 +32,9 @@ public class DriverManager {
             webDriver.quit();
             webDriverThreadLocal.remove();
         });
+    }
+
+    public static byte[] takeScreenshot() {
+        return ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }

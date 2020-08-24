@@ -1,4 +1,5 @@
 package com.cucumber.testng.pages.base;
+import com.cucumber.testng.driver.DriverManager;
 import com.cucumber.testng.elements.base.Element;
 import com.cucumber.testng.utils.Wait;
 import org.openqa.selenium.By;
@@ -11,8 +12,8 @@ import java.util.stream.Collectors;
 public abstract class BasePage {
     private WebDriver _driver;
 
-    protected BasePage(WebDriver driver) {
-        this._driver = driver;
+    protected BasePage() {
+        this._driver = DriverManager.getDriver();
         PageFactory.initElements(this._driver, this);
     }
 
@@ -27,6 +28,10 @@ public abstract class BasePage {
         var resultsList = collection.stream().map(
                 element -> new Element(element)).collect(Collectors.toList());
         return resultsList;
+    }
+
+    protected void open(String url) {
+        _driver.get(url);
     }
 
 
